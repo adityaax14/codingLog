@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+    body{
+      margin: 0px;
+     background: linear-gradient(135deg, #e8f5e9, #f5f6fa);
+       height:100vh;
+       font-family: 'Inter', sans-serif;
+    }
+    .navbar{
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+      padding-left: 35px;
+      padding-right: 35px;
+      
+      align-items: center;
+      background: white;
+      border-bottom: 1px solid #ccc;
+    }
+    .title{
+      font-size: 21px;
+      font-weight: 600;
+    }
+    .navbar nav a {
+  margin: 0 10px; text-decoration: none; font-weight: 600; color: #4CAF50; cursor: pointer;
+   }
+
+   .navbar nav a.active {
+     text-decoration: underline;
+   }
+   .dark-mode{
+    color: white;
+    
+    font-size: 13px;
+    background: #444;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    
+   }
+   .logout-btn{
+    color: white;
+    
+    font-size: 13px;
+    background: crimson;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    font-weight: 600;
+   }
+   
+   .welcome{
+    padding: 45px;
+      
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+       background: linear-gradient(135deg, #e0f7fa, #ede7f6);
+      width: 700px;
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+   body.dark {
+  background: #121212;
+  color: white;
+}
+
+body.dark .welcome,.navbar,body.dark .title {
+  background: #1e1e1e;
+  color: white;
+}
+
+ body.dark button {
+  background: #333;
+  color: white;
+  border: 1px solid #666;
+}
+.logs{
+  width: 300px;
+  
+  height: 30px;
+  border-radius :70px;
+  border-color: rgb(245, 245, 245);
+  border: solid;
+  
+}
+.details{
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 8px;
+  height: 60px;
+  border-color: rgb(245, 245, 245);
+  border-bottom-color: rgb(245, 245, 245);
+
+}
+.logbtn{
+  
+  background: #4CAF50;       
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+
+}
+.new-log{
+  padding: 25px;
+      
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.43);
+      width: 600px;
+      margin-top: 30px;
+      
+}
+.welcome2{
+    padding: 45px;
+      
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, #d0f0c0, #f5f6fa);
+      width: 700px;
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+   body.dark {
+  background: #121212;
+  color: white;
+}
+body.dark .welcome2{
+  background: #1e1e1e;
+  color: white;
+}
+
+    </style>
+    <body>
+      <div class="navbar">
+        <h1 class="title">Coding Practice Log</h1>
+        <nav>
+          <a href="home.html">Home</a>
+          <a href="logs.html">Logs</a>
+          <a href="about.html">About</a>
+          
+        </nav>
+        <div>
+      <button class="dark-mode" >🌙 Dark Mode</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+      </div>
+
+      <div class="welcome">
+        <h1>Add New Log</h1>
+        <select class="logs" required>
+         <option value="Arrays">Arrays</option>
+         <option value="Linked Lists">Linked Lists</option>
+        <option value="Stacks">Stacks</option>
+        <option value="Queues">Queues</option>
+        <option value="Deque">Deque</option>
+        <option value="Hash Tables">Hash Tables</option>
+        <option value="Heaps">Heaps</option>
+        <option value="Trees">Trees</option>
+        <option value="Graphs">Graphs</option>
+        <option value="Sorting Algorithms">Sorting Algorithms</option>
+        <option value="Searching Algorithms">Searching Algorithms</option>
+        <option value="Dynamic Programming">Dynamic Programming</option>
+        <option value="Greedy Algorithms">Greedy Algorithms</option>
+        <option value="Divide and Conquer">Divide and Conquer</option>
+        <option value="Backtracking">Backtracking</option>
+        <option value="String Algorithms">String Algorithms</option>
+        <option value="Complexity Analysis">Complexity Analysis</option>
+        <option value="Problem-Solving Patterns">Problem-Solving Patterns</option>
+        </select>
+
+        <input type="text" placeholder="Details of what you practiced.." class="details">
+        <button class="logbtn">Add Log</button>
+       
+      </div>
+
+      <div class="welcome2">
+        <h2>Your Logs:</h2>
+        <div class="logs-value">
+
+        </div>
+
+        </div>
+
+
+      </div>
+      
+
+
+
+
+      <script type="module">
+         import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+        let name=localStorage.getItem("Username");
+         
+
+        function toggleDark(){
+            document.body.classList.toggle("dark");
+        }
+
+        function logout(){
+          window.location.href="login.html";
+        }
+        document.querySelector('.logbtn').addEventListener('click',addlog);
+        document.querySelector('.dark-mode').addEventListener('click',toggleDark);
+        document.querySelector('.logout-btn').addEventListener('click',logout);
+        function getUserData(){
+          return JSON.parse(localStorage.getItem(name))|| {password:"", logs:[]};
+        }
+        function saveUserData(data){
+           localStorage.setItem(name,JSON.stringify(data));
+        }
+
+        function showLog(){
+           let user=JSON.parse(localStorage.getItem(name));
+           let logs=user.logs || [];
+           document.querySelector('.logs-value').innerHTML="";
+           logs.forEach((log)=>{
+              document.querySelector('.logs-value').innerHTML+=
+              ` 
+          <div class="new-log" >
+          <h3 class="log-title">${log.title}</h3>
+          <p class="date-">${log.date}</p>
+          <p class="description">${log.description}</p>
+          </div>`
+
+           });
+
+           
+        }
+        
+        function addlog(){
+        let today=dayjs();
+        
+        let newlogs= {
+          title:document.querySelector('.logs').value,
+          date:`${today.format("DD-MM-YYYY")}`,
+          description:document.querySelector('.details').value
+        };
+
+         let user=getUserData();
+         user.logs.unshift(newlogs);
+         saveUserData(user);
+          
+        
+       
+
+        
+        
+        showLog();
+        
+        }
+        showLog();
+         
+        
+      </script>
+    </body>
+  </head>
+</html>

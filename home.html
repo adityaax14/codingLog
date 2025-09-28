@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+    body{
+      margin: 0px;
+      background: linear-gradient(135deg, #e8f5e9, #f5f6fa);
+       height:100vh;
+       font-family: 'Inter', sans-serif;
+    }
+    .navbar{
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+      padding-left: 35px;
+      padding-right: 35px;
+      
+      align-items: center;
+      background: white;
+      border-bottom: 1px solid #ccc;
+    }
+    .title{
+      font-size: 21px;
+      font-weight: 600;
+    }
+    .navbar nav a {
+  margin: 0 10px; text-decoration: none; font-weight: 600; color: #4CAF50; cursor: pointer;
+   }
+
+   .navbar nav a.active {
+     text-decoration: underline;
+   }
+   .dark-mode{
+    color: white;
+    
+    font-size: 13px;
+    background: #444;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    
+   }
+   .logout-btn{
+    color: white;
+    
+    font-size: 13px;
+    background: crimson;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    font-weight: 600;
+   }
+   
+   .welcome{
+    padding: 45px;
+      
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+       background: linear-gradient(135deg, #e0f7fa, #ede7f6);
+      width: 700px;
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+   body.dark {
+  background: #121212;
+  color: white;
+}
+
+body.dark .welcome,.navbar,body.dark .title {
+  background: #1e1e1e;
+  color: white;
+}
+
+ body.dark button {
+  background: #333;
+  color: white;
+  border: 1px solid #666;
+}
+.photos{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  
+}
+ img{
+  width: 50%;
+}
+.goal-input{
+  width: 300px;
+
+  border: 1px 1px solid #666;
+  border-radius: 150px;
+  display: inline;
+  height: 30px;
+
+  
+}
+.donebtn{
+  background: #4CAF50;       
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.goal-text{
+  
+}
+    </style>
+    <body>
+      <div class="navbar">
+        <h1 class="title">Coding Practice Log</h1>
+        <nav>
+          <a href="home.html" class="active">Home</a>
+          <a href="logs.html">Logs</a>
+          <a href="about.html">About</a>
+          
+        </nav>
+        <div>
+      <button class="dark-mode">🌙 Dark Mode</button>
+      <button class="logout-btn">Logout</button>
+    </div>
+      </div>
+
+      <div class="welcome">
+        <h2 class="welcome-text"></h2>
+
+  <div class="stats">
+    <p>✔ You’ve logged <strong>32</strong> practice sessions this month</p>
+    <p>✔ You’re on a <strong>6-day streak 🔥</strong></p>
+    <p>✔ You’ve practiced <strong>12 unique topics</strong></p>
+  </div>
+
+  <div class="recent-logs">
+    <h3> Recent Logs:</h3>
+    <ul>
+      <li class="slot1"></li>
+      <li class="slot2"></li>
+      
+    </ul>
+  </div>
+
+  <div class="goal">
+    
+    <input type="text" placeholder="Type your Goal here!" class="goal-input">
+    <button class="donebtn">Done</button>
+    <h3> Your Goal:</h3>
+    <h3 class="goal-text"></h3>
+  </div>
+
+  <div class="tip">
+    <h3> Tip:</h3>
+    <p>Consistency > Intensity. Even 30 minutes a day compounds!</p>
+  </div>
+      </div>
+      
+
+
+
+      
+      <script type="module">
+        
+       
+        import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+        dates();
+        let name=localStorage.getItem("Username");
+        document.querySelector('.welcome-text').innerHTML=`Welcome back, ${name}!`;
+        dates();
+        document.querySelector(".dark-mode").addEventListener("click", toggleDark);
+        document.querySelector(".logout-btn").addEventListener("click", logout);
+        document.querySelector(".donebtn").addEventListener("click", goaltext);
+        function toggleDark(){
+            document.body.classList.toggle("dark");
+        }
+
+        function logout(){
+          window.location.href="login.html";
+        }
+        function goaltext(){
+           document.querySelector('.goal-text').innerHTML=document.querySelector('.goal-input').value;
+           document.querySelector('.goal-input').value="";
+
+        }
+        function dates(){
+           let today=dayjs();
+          let yesterday=dayjs().subtract(1,'day');
+          
+          document.querySelector('.slot1').innerHTML=`[${today.format("YYYY-MM-DD")}] Solved 3 problems on Arrays`;
+          document.querySelector('.slot2').innerHTML=`[${yesterday.format("YYYY-MM-DD")}] Solved 3 problems on BinarySearch`;
+
+
+
+        }
+
+       
+
+      </script>
+    </body>
+  </head>
+</html>

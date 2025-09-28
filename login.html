@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  <title>Coding Practice Log</title>
+  <style>
+    body{
+      margin: 0;
+       background: linear-gradient(135deg, #e0f7fa, #ede7f6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+       background: #f5f6fa;
+       height:100vh;
+       font-family: 'Inter', sans-serif;
+
+
+    }
+
+    #loginBox{
+      padding: 45px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: white;
+      width: 350px;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+    }
+    input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+button.primary{
+  padding: 10px;
+  color: white;
+  background: #4CAF50;
+  border: none;
+  width: 70px;
+  cursor: pointer;
+  font-weight: 600;
+
+}
+button.primary:hover { background: #3e8e41; }
+
+.toggle span{
+  color:#4CAF50 ;
+  font-weight: 600;
+  cursor: pointer;
+}
+.error{
+  color: red;
+  font-size: 12px;
+}
+
+
+  </style>
+  </head>
+  <body>
+    <div id="loginBox">
+      <h2 id="formhead">Login</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" id="loginbtn" class="primary">Login</button>
+        <p class="error" id="errorMsg"></p>
+
+      </form>
+      <div class="toggle">
+        Don’t have an account? <span onclick="toggleForm()">Register</span>
+      </div>
+      
+    </div>
+    <script>
+      let isLogin=true;
+      let name="";
+      function toggleForm(){
+        isLogin=!isLogin;
+        document.getElementById('formhead').innerHTML=isLogin? "Login": "Register";
+         document.getElementById("loginbtn").innerText = isLogin ? "Login" : "Register";
+         document.getElementById("toggle").innerHTML=isLogin? ` Don’t have an account? <span onclick="toggleForm()">Register</span>`
+          : `Already have an account? <span onclick="toggleForm()">Login</span>`;
+
+          document.getElementById("errorMsg").innerText = "";
+
+
+      }
+      document.getElementById('loginForm').addEventListener("submit",function(e){
+        e.preventDefault();
+        let username=document.getElementById("username").value.trim();
+        name=username;
+        let password=document.getElementById("password").value;
+
+        if(isLogin){
+
+          let user=JSON.parse(localStorage.getItem(username));
+          if(user && user.password==password){
+            localStorage.setItem("Username",username);
+            window.location.href = "home.html";
+          }
+          else{
+            document.getElementById("errorMsg").innerHTML="Invalid Username or password";
+          }
+
+      }
+      else{
+        if (localStorage.getItem(username)) {
+          document.getElementById("errorMsg").innerText = "Username already exists!";
+        }
+        else{
+          let userdata={password: password ,logs: []};
+          localStorage.setItem(username,JSON.stringify(userdata));
+          localStorage.setItem("Username",username);
+          window.location.href = "home.html";
+        }
+      }
+
+      });
+
+      
+
+      
+    </script>
+
+  </body>
+</html>
